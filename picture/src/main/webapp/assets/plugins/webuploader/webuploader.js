@@ -2016,7 +2016,7 @@
             },
     
             loadFromBlob: function( blob ) {
-                console.log(blob)
+              //  console.log(blob)
             	var me = this,
                     ruid = blob.getRuid();
     
@@ -2365,27 +2365,15 @@
         'base',
         'mediator'
     ], function( Base, Mediator ) {
-    
+
         var $ = Base.$,
-            idPrefix = 'WUC_',
+            idPrefix = 'WU_FILE_',
             idSuffix = 0,
             rExt = /\.([^.]+)$/,
             statusMap = {};
     
         function gid() {
-        	var idArr=[]
-                 $("li[id^="+idPrefix+"]").each(function(i,v){
-                	 idArr.push($(v).attr("id").split("_")[1]);
-                	 console.log(idArr)
-                 })
-                 if(idArr==""){
-                	 idSuffix=0
-                 }else{
-                	 console.log(idArr)
-                	 var max=Math.max.apply(null, idArr);
-                     console.log(max)
-                     idSuffix=max+1; 
-                 }       
+
         	return idPrefix + idSuffix++;
         }    
         /**

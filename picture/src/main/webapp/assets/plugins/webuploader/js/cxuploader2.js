@@ -99,21 +99,25 @@
                 	placeholder.addClass( 'element-invisible' );
                     statusBar.show();
                 }
-                
+
                 addFile( file,uploader[index],queue);
                 setState( 'ready' ,uploader[index],placeholder,queue,statusBar,jxfilePicker);
                 updateStatus('ready',info,fileCount,fileSize);
+
+
             };
             
             //加载的时候
-            uploader[index]	.on('ready',function(){
+            uploader[index].on('ready',function(){
             	$.ajax({
             		url:'getFiles.do',
             		type:'GET',
             		async:false,
             		success:function(files){
-            			console.log(files);
+            			//console.log(files);
             			//alert("加载的时候files:" +  JSON.stringify(files) );
+                        //console.log(files.length);
+                        //return;
             			for(var i = 0; i < files.length; i++){
             				var obj ={};
             				statusMap = {};
@@ -145,7 +149,7 @@
                             		uploader[index].trigger('statuschage',status,prevStatus);
                             	}
                             }
-                            console.log("这是你要的obj：" + JSON.stringify(obj));
+                           // console.log("这是你要的obj：" + JSON.stringify(obj));
                             addFile( obj,uploader[index],queue);
                             setState( 'ready' ,uploader[index],placeholder,queue,statusBar,jxfilePicker);
                             updateStatus('ready',info,fileCount,fileSize);
@@ -169,7 +173,7 @@
             
             //上传成功
             uploader[index].on('uploadSuccess',function(file,reponse){
-            	//alert("上传成功");
+            	alert("上传成功");
             });
             
 
@@ -201,6 +205,9 @@
     	
         // 当有文件添加进来时执行，负责view的创建
         function addFile( file,now_uploader,queue) {
+
+            //console.log(queue);
+           // console.log(0);
             var $li = $( '<li id="' + file.id + '">' +
                 '<p class="title">' + file.name + '</p>' +
                 '<p class="imgWrap"></p>'+
@@ -305,7 +312,7 @@
         
              
         function setState( val, now_uploader,placeHolder,queue,statusBar,jxfilePicker) {
-            
+
             switch ( val ) {
                 case 'pedding':
                     placeHolder.removeClass( 'element-invisible' );
@@ -316,12 +323,12 @@
                     break;
 
                 case 'ready':
-                    placeHolder.addClass( 'element-invisible' );
-                    jxfilePicker.removeClass( 'element-invisible');
+                    placeHolder.addClass( 'element-invisible' );//
+                   jxfilePicker.removeClass( 'element-invisible');  // 继续添加按钮  去掉element-invisible
                     queue.parent().addClass('filled');
                     queue.show();
-                    statusBar.removeClass('element-invisible');
-                    now_uploader.refresh();
+                   statusBar.removeClass('element-invisible');
+                   now_uploader.refresh();
                     break;              
             }
 
@@ -329,6 +336,7 @@
         }
         
         function updateStatus(val,info,f_count,f_size) {
+            //alert(1);
             var text = '';
 
             if ( val === 'ready' ) {

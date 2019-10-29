@@ -113,7 +113,7 @@
             };
             
             uploader[index].on('uploadSuccess',function(file,reponse){           	
-            	//alert("上传成功");
+            	alert("上传成功");
             });
             
 
@@ -159,7 +159,6 @@
                 $info = $('<p class="error"></p>');
                 
             $wrap.text( '预览中' );
-            
             if(file.flog == true){
             	var img = $('<img src="'+file.ret+'" width="100px" height="100px">');
                 $wrap.empty().append( img );
@@ -177,8 +176,9 @@
 
             percentages[ file.id ] = [ file.size, 0 ];
             file.rotation = 0;
-            /*          
-            file.on('statuschange', function( cur, prev ) {            	
+
+            //是否允许修改
+           /* file.on('statuschange', function( cur, prev ) {
                 if ( prev === 'progress' ) {
                     $prgress.hide().width(0);
                 } else if ( prev === 'queued' ) {
@@ -203,8 +203,8 @@
                 }
 
                 $li.removeClass( 'state-' + prev ).addClass( 'state-' + cur );
-            });
-             */          
+            });*/
+
             $li.on( 'mouseenter', function() {
                 $btns.stop().animate({height: 30});
             });
@@ -287,9 +287,6 @@
             } 
             info.html( text );
         } 
-        
-       
-          
   });
     
     
