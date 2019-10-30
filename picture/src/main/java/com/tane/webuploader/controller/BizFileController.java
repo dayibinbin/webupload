@@ -72,7 +72,7 @@ public class BizFileController {
 			String ensourPath =  FileUtils.getEnourPath(request,file,filePathGen);		
 			//解析ensourPath
 			String[] split = ensourPath.split("upload");
-			String url = "http://192.168.1.34:8089\\upload" + split[1].substring(0, split[1].length());
+			String url = "http://localhost:8089\\upload" + split[1].substring(0, split[1].length());
 			//数据封装
 			BizFile bizFile = new BizFile();
 			bizFile.setSize(size);
